@@ -56,6 +56,9 @@ const gameNodeSchema = mongoose.Schema({
         id : String,
         choice : String
     }],
+    theme: {
+        type: String,
+    },
     nodeImage: {
         type: String
     }
