@@ -175,8 +175,23 @@ router.put('/edit/image/:id', upload, async (req, res) => {
     }
 })
 
+router.put('/edit/compiled_content/:id', async (req, res) => {
+    const { compiled_content } = req.body
+    try{
+        const gameNode = await GameNode.findById(req.params.id)
+        
+        gameNode.compiled_content = compiled_content;
+        
+        await gameNode.save();
+
+        return res.send({ gameNode });
+    }catch(err){
+        return res.status(400).send({ error: 'Failed to update node.' });
+    }
+})
+
 router.put('/edit/:id', async (req, res) => {
-    const { name, duration, markdownContent, theme } = req.body
+    const { name, duration, markdownContent, theme, compiled_content} = req.body
     try{
         const gameNode = await GameNode.findById(req.params.id)
 
