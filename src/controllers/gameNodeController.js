@@ -120,7 +120,6 @@ router.put('/edit/labels/:id', async (req, res) => {
 router.put('/edit/colors/:id', async (req, res) => {
     const { backgroundColor, textColor, nodeColor } = req.body
     try{
-        console.log(backgroundColor, textColor, nodeColor)
         const gameNode = await GameNode.findById(req.params.id);
         gameNode.nodeColor = nodeColor;
         gameNode.textColor = textColor;
@@ -162,20 +161,29 @@ router.put('/edit/start/:id', async (req, res) => {
     }
 })
 
-router.put('/edit/:id', upload, async (req, res) => {
-    const { name, nodeColor, textColor, backgroundColor, duration, markdownContent, theme } = req.body
+router.put('/edit/image/:id', upload, async (req, res) => {
+    try{
+        const gameNode = await GameNode.findById(req.params.id)
+        if(req.file !== null)
+            gameNode.nodeImage = req.file.filename
+
+        await gameNode.save();
+
+        return res.send({ gameNode });
+    }catch(err){
+        return res.status(400).send({ error: 'Failed to update node.' });
+    }
+})
+
+router.put('/edit/:id', async (req, res) => {
+    const { name, duration, markdownContent, theme } = req.body
     try{
         const gameNode = await GameNode.findById(req.params.id)
 
         gameNode.name = name;
-       // gameNode.nodeColor = nodeColor;
-       // gameNode.textColor = textColor;
-       // gameNode.backgroundColor = backgroundColor;
         gameNode.duration = duration;
         gameNode.markdownContent = markdownContent;
         gameNode.theme = theme;
-        if(req.file !== null)
-            gameNode.nodeImage = req.file.filename
 
         await gameNode.save();
 
