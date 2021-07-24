@@ -18,6 +18,6 @@ require('./controllers/labelController')(app);
 require('./controllers/gameController')(app);
 require('./controllers/nodeConnectionController')(app);
 
-app.listen(8080, function () {
+app.listen(process.env.PORT || 8080, function () {
     console.log("Started application on port %d", 8080);
 });
