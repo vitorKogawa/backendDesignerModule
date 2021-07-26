@@ -1,7 +1,6 @@
 const express = require("express");
 var cors = require('cors');
 var path = require('path');
-const LogRocket = require('logrocket');
 
 var app = express();
 
@@ -19,8 +18,6 @@ require('./controllers/gameNodeController')(app);
 require('./controllers/labelController')(app);
 require('./controllers/gameController')(app);
 require('./controllers/nodeConnectionController')(app);
-
-LogRocket.init('05adcb/backend-designer-module');
 
 app.listen(process.env.PORT || 8080, function () {
     console.log("Started application on port %d", 8080);
