@@ -40,7 +40,19 @@ router.post('/create', upload, async (req, res) => {
 
 router.get('/', async (req, res) => {
     try{
-        const game = await Game.find();
+        let game;
+        const transaction = Sentry.getCurrentHub()
+        .getScope()
+        .getTransaction();
+
+        if (transaction) {
+            let span = transaction.startChild({
+            op: "getGames",
+            description: "getAllGames",
+            });
+            game = await Game.find();
+            span.finish();
+        }
 
         return res.send({ game });
     }catch(err){

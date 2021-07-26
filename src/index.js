@@ -28,23 +28,17 @@ Sentry.init({
     // Set tracesSampleRate to 1.0 to capture 100%
     // of transactions for performance monitoring.
     // We recommend adjusting this value in production
+    integrations: [
+        // enable HTTP calls tracing
+        new Sentry.Integrations.Http({ tracing: true }),
+      ],
     tracesSampleRate: 1.0,
   });
+
+  Sentry.configureScope(scope => {
+    scope.setSpan(transaction);
+  });  
   
-  const transaction = Sentry.startTransaction({
-    op: "test",
-    name: "My First Test Transaction",
-  });
-  
-  setTimeout(() => {
-    try {
-      foo();
-    } catch (e) {
-      Sentry.captureException(e);
-    } finally {
-      transaction.finish();
-    }
-  }, 99);
 
 app.listen(process.env.PORT || 8080, function () {
     console.log("Started application on port %d", 8080);
