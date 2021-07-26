@@ -1,6 +1,7 @@
 const express = require("express");
 var cors = require('cors');
 var path = require('path');
+const LogRocket = require("logrocket");
 
 var app = express();
 
@@ -9,6 +10,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static(__dirname + '/assets/img/nodes'));
 app.options('*', cors());
+
+LogRocket.init('05adcb/backend-designer-module');
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
