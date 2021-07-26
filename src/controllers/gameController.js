@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require("path");
 const multer = require("multer");
-const Sentry = require("@sentry/node");
 
 const Game = require('../models/game');
 
@@ -41,19 +40,7 @@ router.post('/create', upload, async (req, res) => {
 
 router.get('/', async (req, res) => {
     try{
-        let game;
-        const transaction = Sentry.getCurrentHub()
-        .getScope()
-        .getTransaction();
-
-        if (transaction) {
-            let span = transaction.startChild({
-            op: "getGames",
-            description: "getAllGames",
-            });
-            game = await Game.find();
-            span.finish();
-        }
+        const game = await Game.find();
 
         return res.send({ game });
     }catch(err){
