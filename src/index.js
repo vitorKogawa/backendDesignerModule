@@ -1,9 +1,7 @@
 const express = require("express");
 var cors = require('cors');
 var path = require('path');
-import LogRocket from 'logrocket';
-
-
+const LogRocket = require('logrocket');
 
 var app = express();
 
