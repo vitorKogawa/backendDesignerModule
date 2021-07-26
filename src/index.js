@@ -11,8 +11,6 @@ app.use(cors());
 app.use(express.static(__dirname + '/assets/img/nodes'));
 app.options('*', cors());
 
-LogRocket.init('05adcb/backend-designer-module');
-
 app.get("/", (req, res) => {
     res.send("Hello World!");
 })
@@ -25,3 +23,5 @@ require('./controllers/nodeConnectionController')(app);
 app.listen(process.env.PORT || 8080, function () {
     console.log("Started application on port %d", 8080);
 });
+
+LogRocket.init('05adcb/backend-designer-module');
