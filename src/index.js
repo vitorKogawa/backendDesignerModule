@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(express.static(__dirname + '/assets/img/nodes'));
+app.options('*', cors());
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
