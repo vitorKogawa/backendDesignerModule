@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require("path");
 const multer = require("multer");
+const Sentry = require("@sentry/node");
 
 const Game = require('../models/game');
 
