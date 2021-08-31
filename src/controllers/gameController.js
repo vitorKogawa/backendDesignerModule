@@ -16,19 +16,31 @@ const storage = multer.diskStorage({
  const upload = multer({
     storage: storage,
     limits:{fileSize: 1000000},
- }).single("background_image");
+ }).fields([
+     {name: "background_image", maxCount: 1},
+     {name: "gameImage", maxCount: 1}
+    ]) 
 
 
 router.post('/create', upload, async (req, res) => {
-    const { title, description, default_node_color, default_text_color, template, background_color, background_image, userID } = req.body;
+    const { title, description, default_node_color, default_text_color, template, background_color, background_image, image, userID } = req.body;
     try{
+        var logoImage = "default.jpg";
+        var bgImage = "default.jpg";
+        if (typeof req.files.gameImage !== "undefined") {
+            logoImage = req.files.gameImage[0].filename;  
+        }   
+        if (typeof req.files.background_image !== "undefined") {
+            bgImage = req.files.background_image[0].filename;   
+        }        
         const game = await Game.create({title, 
             description, 
             default_node_color, 
             default_text_color, 
             template, 
             background_color,
-            background_image: req.file.originalname, 
+            background_image: bgImage, 
+            image: logoImage,
             userID
         });
 

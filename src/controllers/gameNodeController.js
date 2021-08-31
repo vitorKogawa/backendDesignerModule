@@ -22,8 +22,8 @@ const router = express.Router();
 
 router.post('/create', async (req, res) => {
     try{
-        const { id, name, position, startNode, endNode, nodeColor, textColor, backgroundColor, duration, markdownContent, labels, nextNodes } = req.body;
-        const gameNode = await GameNode.create({name, position, nodeColor, startNode, endNode, textColor, backgroundColor, duration, markdownContent, nextNodes});
+        const { id, name, position, startNode, endNode, nodeColor, textColor, backgroundColor, duration, markdownContent, labels, nextNodes, nodeType } = req.body;
+        const gameNode = await GameNode.create({name, position, nodeColor, startNode, endNode, textColor, backgroundColor, duration, markdownContent, nextNodes, nodeType});
         
         await Promise.all(labels.map(async element => { 
             const nodeLabel = await Label.find({'label': element.name});
