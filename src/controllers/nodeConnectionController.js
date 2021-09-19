@@ -33,4 +33,15 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/current/:id', async (req, res) => {
+    try{
+        let id = req.params.id;
+        const nodeLastConnection = await GameNodeConnection.find({ "source" : id });
+
+        return res.send({ nodeLastConnection });
+    }catch(err){
+        return res.status(400).send({ error: 'Failed to get connections.' });
+    }
+})
+
 module.exports = app => app.use('/connection', router);

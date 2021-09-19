@@ -208,6 +208,20 @@ router.put('/edit/:id', async (req, res) => {
     }
 })
 
+router.put('/edit/form/:id', async (req, res) => {
+    const { form } = req.body
+    try{
+        const gameNode = await GameNode.findById(req.params.id);
+        gameNode.form = form;
+        
+        await gameNode.save();
+
+        return res.send({ gameNode });
+    }catch(err){
+        return res.status(400).send({ error: 'Failed to update node.' });
+    }
+})
+
 router.delete('/delete/:id', async(req, res) => {
     const nodeID = req.params.id;
     const { elements, game } = req.body;   
@@ -226,21 +240,25 @@ router.delete('/delete/:id', async(req, res) => {
             else{
                 if(item.source !== nodeID){
                     const node = await GameNode.findById(item.source);
-                    node.nextNodes.forEach(async (elem, index) => {
-                        if(elem.id === nodeID){
-                            node.nextNodes.pull({_id: node.nextNodes[index]._id}) 
-                            await node.save()
-                        }
-                    })
+                    if(node !== null){
+                        node.nextNodes.forEach(async (elem, index) => {
+                            if(elem.id === nodeID){
+                                node.nextNodes.pull({_id: node.nextNodes[index]._id}) 
+                                await node.save()
+                            }
+                        })
+                    }
                 }
                 else if(item.target !== nodeID){
                     const node = await GameNode.findById(item.target);
-                    node.nextNodes.forEach(async (elem, index) => {
-                        if(elem.id === nodeID){
-                            node.nextNodes.pull({_id: node.nextNodes[index]._id}) 
-                            await node.save()
-                        }
-                    })
+                    if(node !== null){
+                        node.nextNodes.forEach(async (elem, index) => {
+                            if(elem.id === nodeID){
+                                node.nextNodes.pull({_id: node.nextNodes[index]._id}) 
+                                await node.save()
+                            }
+                        })
+                    }
                 }
                 await GameNodeConnection.findByIdAndDelete(item.id);
             } 

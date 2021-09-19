@@ -65,6 +65,9 @@ const gameNodeSchema = mongoose.Schema({
     nodeType: {
         type: String,
         require: true
+    },
+    form: {
+        type: Array
     }
 }); 
 
