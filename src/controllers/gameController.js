@@ -94,4 +94,15 @@ router.get('/userGames/:id', async (req, res) => {
     }
 })
 
+router.delete('/delete/:id', async(req, res) => {
+    const gameId = req.params.id;
+    const { elements, game } = req.body;   
+    try{
+        await Game.findByIdAndDelete(gameId);
+        return res.status(200).send({success: 'Game has been deleted.'})
+    }catch(err){
+        return res.status(400).send({error: 'Failed to delete game.', err})
+    }
+})
+
 module.exports = app => app.use('/game', router);
