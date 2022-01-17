@@ -19,11 +19,11 @@ app.post("/message/send", (req, res) => {
     res.send("Publishing an Event using Redis");
 })
 
-subscriber.on("message",(channel,message) => {
-    console.log("Received data :"+message);
-})
+    subscriber.on("message",(channel,message) => {
+        console.log("Received data :"+message);
+    })
 
-subscriber.subscribe("topic-analytics"); 
+    subscriber.subscribe("topic-analytics"); 
 
 require('./controllers/gameNodeController')(app);
 require('./controllers/labelController')(app);
