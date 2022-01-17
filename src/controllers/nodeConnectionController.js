@@ -1,47 +1,58 @@
-const express = require('express');
-const GameNodeConnection = require('../models/nodeConnection');
+import { NodeConnectionSchema } from "./../models/nodeConnection";
 
-const router = express.Router();
+class NodeConnectionController {
+    create = async (request, response) => {
+        try {
+            const nodeConnection = await NodeConnectionSchema.create(
+                request.body
+            );
 
-router.post('/create', async (req, res) => {
-    try{
-        const nodeConnection = await GameNodeConnection.create(req.body);
+            return response.send({ nodeConnection });
+        } catch (error) {
+            return response.status(400).send({ error: "Registration failed." });
+        }
+    };
 
-        return res.send({nodeConnection});
-    }catch(err){
-        return res.status(400).send({error: 'Registration failed.'});
-    }
-});
+    findAll = async (request, response) => {
+        try {
+            const nodeConnection = await NodeConnectionSchema.find();
 
-router.get('/', async (req, res) => {
-    try{
-        const nodeConnection = await GameNodeConnection.find();
+            return response.send({ nodeConnection });
+        } catch (error) {
+            return response
+                .status(400)
+                .send({ error: "Failed to get connections." });
+        }
+    };
 
-        return res.send({ nodeConnection });
-    }catch(err){
-        return res.status(400).send({ error: 'Failed to get connections.' });
-    }
-})
+    findByID = async (request, response) => {
+        try {
+            const nodeConnection = await NodeConnectionSchema.find({
+                gameId: request.params.id,
+            });
 
-router.get('/:id', async (req, res) => {
-    try{
-        const nodeConnection = await GameNodeConnection.find({gameId: req.params.id});
+            return response.send({ nodeConnection });
+        } catch (error) {
+            return response
+                .status(400)
+                .send({ error: "Failed to get connections." });
+        }
+    };
 
-        return res.send({ nodeConnection });
-    }catch(err){
-        return res.status(400).send({ error: 'Failed to get connections.' });
-    }
-})
+    findCurrentByID = async (request, response) => {
+        try {
+            let id = request.params.id;
+            const nodeLastConnection = await NodeConnectionSchema.find({
+                source: id,
+            });
 
-router.get('/current/:id', async (req, res) => {
-    try{
-        let id = req.params.id;
-        const nodeLastConnection = await GameNodeConnection.find({ "source" : id });
+            return response.send({ nodeLastConnection });
+        } catch (error) {
+            return response
+                .status(400)
+                .send({ error: "Failed to get connections." });
+        }
+    };
+}
 
-        return res.send({ nodeLastConnection });
-    }catch(err){
-        return res.status(400).send({ error: 'Failed to get connections.' });
-    }
-})
-
-module.exports = app => app.use('/connection', router);
+export default new NodeConnectionController();

@@ -1,26 +1,27 @@
-const express = require('express');
-const Label = require('../models/label');
+import { Label } from "./../models/label";
 
-const router = express.Router();
+class LabelController {
+    create = async (request, response) => {
+        try {
+            const label = await Label.create(request.body);
 
-router.post('/create', async (req, res) => {
-    try{
-        const label = await Label.create(req.body);
+            return response.send({ label });
+        } catch (error) {
+            return response.status(400).send({ error: "Registration failed." });
+        }
+    };
 
-        return res.send({label});
-    }catch(err){
-        return res.status(400).send({error: 'Registration failed.'});
-    }
-});
+    findAll = async (request, response) => {
+        try {
+            const label = await Label.find();
 
-router.get('/', async (req, res) => {
-    try{
-        const label = await Label.find();
+            return response.send({ label });
+        } catch (error) {
+            return response
+                .status(400)
+                .send({ error: "Failed to get labels." });
+        }
+    };
+}
 
-        return res.send({ label });
-    }catch(err){
-        return res.status(400).send({ error: 'Failed to get labels.' });
-    }
-})
-
-module.exports = app => app.use('/label', router);
+export default new LabelController();
