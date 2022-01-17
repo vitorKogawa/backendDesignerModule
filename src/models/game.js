@@ -3,48 +3,52 @@
     “attributes”: [embeddedDocument]
     “player_model”: embeddedDocument
 */
-const mongoose = require('../database/connection');
+import { mongoose } from "./../database/connection";
 
 const gameSchema = mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
     },
     default_node_color: {
         type: String,
-        default: "#fff"
+        default: "#fff",
     },
     default_text_color: {
         type: String,
-        default: "#000"
+        default: "#000",
     },
+    //mudar para boolean
     template: {
         type: String,
-        default: false
+        default: false,
     },
     image: {
         type: String,
     },
+    //upload do modal
     background_image: {
-        type: String
+        type: String,
     },
     background_color: {
         type: String,
-        default: "#fff"
+        default: "#fff",
     },
-    nodes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "gameNode"
-    }],
+    nodes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "gameNode",
+        },
+    ],
     userID: {
         type: String,
-        require: true
-    }
+        require: true,
+    },
 });
 
-const Game = mongoose.model('game', gameSchema);
+const Game = mongoose.model("game", gameSchema);
 
-module.exports = Game;
+export { Game };

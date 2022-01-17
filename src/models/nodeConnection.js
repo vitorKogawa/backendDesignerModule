@@ -1,4 +1,4 @@
-const mongoose = require('../database/connection');
+import { mongoose } from './../database/connection'
 
 const nodeConnectionSchema = mongoose.Schema({
     _id: {
@@ -20,6 +20,6 @@ const nodeConnectionSchema = mongoose.Schema({
 
 }, { _id: false }); 
 
-const GameNodeConnection = mongoose.model('nodeConnection', nodeConnectionSchema);
+const NodeConnectionSchema = mongoose.model('nodeConnection', nodeConnectionSchema);
 
-module.exports = GameNodeConnection;
+export { NodeConnectionSchema }

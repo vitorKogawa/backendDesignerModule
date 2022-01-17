@@ -1,4 +1,5 @@
-const mongoose = require("../database/connection");
+// const mongoose = require("../database/connection");
+import { mongoose } from './../database/connection'
 
 const positionSchema = mongoose.Schema({
     x: {
@@ -73,4 +74,5 @@ const gameNodeSchema = mongoose.Schema({
 
 const GameNode = mongoose.model('gameNode', gameNodeSchema);
 
-module.exports = GameNode;
+// module.exports = GameNode;
+export { GameNode }
