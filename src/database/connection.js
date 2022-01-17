@@ -1,17 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+import { databaseConnection } from "./../config/databaseConnection.config";
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb+srv://papiroadmin:oc1l2Ud7w8a3vuYq@cluster-01-papiro.z0nkz.mongodb.net/papirodb?retryWrites=true&w=majority', {
-  useNewUrlParser: true, 
-  useUnifiedTopology: true,
-  useFindAndModify: false 
-}).then(()=>{
-    console.log('Connected.');
-}).catch((err)=>{
-    console.log("Houve um erro: " + err);
-});
+mongoose
+    .connect(
+        databaseConnection.databaseURL,
+        databaseConnection.connectionOptions
+    )
+    .then(() => console.log("Connected."))
+    .catch((error) => console.log('String de conexão: ', process.env.DATABASE_URL));
 
-
-
-module.exports = mongoose;
+export { mongoose };
