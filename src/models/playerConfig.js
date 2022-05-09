@@ -6,14 +6,34 @@
 import { mongoose } from "./../database/connection";
 
 const playerConfigSchema = mongoose.Schema({
-    id: {},
-    insert_name: {},
-    progress: {},
-    inventory_max: {},
-    inventory_equipped_slots: {},
-    attribute_start: {},
-    dice: {},
-    points: {}
+    _id: {
+        type: String,
+        required: true
+    },
+    insert_name: {
+        type: Boolean,
+        default: false
+    },
+    progress: {
+        type: Boolean
+    },
+    inventory_max: {
+        type: Number
+    },
+    inventory_equipped_slots: {
+        type: Number
+    },
+    attribute_start: {
+        type: String
+    },
+    dice: {
+        //roll_number
+        type: Number
+    },
+    points: {
+        //max_limit
+        type: Number
+    }
 });
 
 const playerConfig = mongoose.model("playerConfig", playerConfigSchema);

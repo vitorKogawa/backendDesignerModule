@@ -6,14 +6,16 @@
 import { mongoose } from "./../database/connection";
 
 const rewardsSchema = mongoose.Schema({
-    id: {},
-    insert_name: {},
-    progress: {},
-    inventory_max: {},
-    inventory_equipped_slots: {},
-    attribute_start: {},
-    dice: {},
-    points: {}
+    _id: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String
+    },
+    badge_image: {
+        type: String
+    }
 });
 
 const rewards = mongoose.model("rewards", rewardsSchema);

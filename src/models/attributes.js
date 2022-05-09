@@ -6,14 +6,34 @@
 import { mongoose } from "./../database/connection";
 
 const attributesSchema = mongoose.Schema({
-    id: {},
-    name: {},
-    type: {},
-    max_value: {},
-    default_value: {},
-    player_attr: {}
+    _id: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String
+    },
+    max_value: {
+        type: Number,
+        default: 0
+    },
+    default_value: {
+        type: Number,
+        default: 0
+    },
+    player_attr: {
+        type: Boolean,
+        default: false,
+    },
+    icon: {
+        type: String
+    }
 });
 
-const attributes = mongoose.model("attributes", attributesSchema);
+const Attributes = mongoose.model("attributes", attributesSchema);
 
-export { attributes };
+export { Attributes };

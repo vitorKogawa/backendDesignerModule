@@ -6,17 +6,37 @@
 import { mongoose } from "./../database/connection";
 
 const eventSchema = mongoose.Schema({
-    id: {},
-    name: {},
-    source_type: {},
-    source_id: {},
-    operator: {},
-    value: {},
-    target_type: {},
-    target_id: {},
-    modifier: {}
+    _id: {
+        type: String,
+        required: true
+    },
+    name: {
+        type: String,
+        required: true
+    },
+    source_type: {
+        type: String
+    },
+    source_id: {
+        type: String
+    },
+    operator: {
+        type: String
+    },
+    value: {
+        type: Number
+    },
+    target_type: {
+        type: String
+    },
+    target_id: {
+            type: String
+    },
+    modifier: {
+            type: Number
+    }
 });
 
-const events = mongoose.model("events", eventSchema);
+const Events = mongoose.model("events", eventSchema);
 
 export { events };
