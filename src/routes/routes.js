@@ -3,6 +3,7 @@ import { gameRouter } from "./game.routes";
 import { nodeConnectionRoutes } from "./nodeConnection.routes";
 import { labelRoutes } from "./label.routes";
 import { gameNodeRoutes } from "./gameNode.routes";
+import { attributesRoutes } from './attributes.routes' 
 // import { redisRouter } from './redis.routes'
 import { resolve } from "path";
 
@@ -12,6 +13,7 @@ routes.use("/game", gameRouter);
 routes.use("/connection", nodeConnectionRoutes);
 routes.use("/label", labelRoutes);
 routes.use("/node", gameNodeRoutes);
+routes.use("/attributes", attributesRoutes);
 // routes.use(redisRouter);
 
 routes.use(static(resolve(__dirname, "assets", "img")));
