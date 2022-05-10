@@ -6,10 +6,10 @@
 import { mongoose } from "./../database/connection";
 
 const playerConfigSchema = mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
+    // _id: {
+    //     type: String,
+    //     required: true
+    // },
     insert_name: {
         type: Boolean,
         default: false

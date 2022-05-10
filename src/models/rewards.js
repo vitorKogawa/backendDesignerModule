@@ -6,10 +6,10 @@
 import { mongoose } from "./../database/connection";
 
 const rewardsSchema = mongoose.Schema({
-    _id: {
-        type: String,
-        required: true
-    },
+    // _id: {
+    //     type: String,
+    //     required: true
+    // },
     name: {
         type: String
     },
