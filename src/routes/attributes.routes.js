@@ -1,11 +1,11 @@
 import { Router } from "express";
 import attributesController from "./../controllers/attributesController";
 
-const attributesRoutes = Router();
+const attributeRoute = Router();
 
-attributesRoutes.post("/create", attributesController.create);
-attributesRoutes.get("/:id", attributesController.findByID);
-attributesRoutes.put("/:id", attributesController.update);
-attributesRoutes.delete("/:id", attributesController.remove);
+attributeRoute.post("/create", attributesController.create);
+attributeRoute.get("/:id", attributesController.findByID);
+attributeRoute.put("/:id", attributesController.update);
+attributeRoute.delete("/:id", attributesController.remove);
 
-export { attributesRoutes };
+export { attributeRoute };
