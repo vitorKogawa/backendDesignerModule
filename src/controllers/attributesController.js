@@ -1,9 +1,17 @@
 import { response, Router } from "express";
 import { Attributes } from "./../models/attributes";
 
+/**
+ * [TODO]
+ *  -> Vaidações dos dados 
+ *      -> create ...
+ *      -> findByID ...
+ *      -> update ...
+ *      -> remove ...
+ */
+
 class AttributesController {
     create = async (request, response) => {
-        //implementar validações
         try {
             const {
                 _id,
@@ -49,8 +57,8 @@ class AttributesController {
 
     update = async (request, response) => {
         try {
-            //verificando se o atributo a ser modificado existe
             const IsAttribute = await Attributes.findById(request.params.id);
+            console.log(IsAttribute)
 
             if (IsAttribute) {
                 const newAttributeData = {
@@ -62,7 +70,10 @@ class AttributesController {
                     icon: request.body.icon,
                 };
 
-                await Attributes.updateOne(newAttributeData, null, { overwrite: false });
+                await Attributes.updateOne(
+                    { "_id": request.params.id },
+                    newAttributeData
+                );
 
                 return response.status(200).json({ message: "sucess." });
             } else {
@@ -71,13 +82,12 @@ class AttributesController {
                     .json({ message: "attribute not found." });
             }
         } catch (error) {
-            return response.status(400).json({ error });
+            return response.status(400).json({ message_error: error });
         }
     };
 
     remove = async (request, response) => {
         try {
-            //verificando se o atributo a ser removido existe.
             const IsAtribute = await Attributes.find({
                 _id: request.params.id,
             });
