@@ -4,7 +4,7 @@ import eventsController from "./../controllers/eventsController";
 const eventsRoute = Router();
 
 eventsRoute.post("/create", eventsController.create);
-eventsRoute.get("/:id", eventsController.findByID);
+eventsRoute.get("/:id", eventsController.find);
 eventsRoute.put("/:id", eventsController.update);
 eventsRoute.delete("/:id", eventsController.remove);
 
