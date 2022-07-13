@@ -18,7 +18,7 @@ gameNodeRoutes.put("/edit/labels/:id", gameNodeController.editLabelsByID);
 gameNodeRoutes.put("/edit/colors/:id", gameNodeController.editColorsByID);
 gameNodeRoutes.put("/edit/end/:id", gameNodeController.editEndByID);
 gameNodeRoutes.put("/edit/start/:id", gameNodeController.editStartByID);
-gameNodeRoutes.put("/edit/image/:id", multer, gameNodeController.editImageByID);
+// gameNodeRoutes.put("/edit/image/:id", multer, gameNodeController.editImageByID);
 gameNodeRoutes.put("/edit/compiled_content/:id",gameNodeController.editCompiledContentByID);
 gameNodeRoutes.put("/edit/:id", gameNodeController.editByID);
 gameNodeRoutes.put("/edit/form/:id", gameNodeController.editFormByID);

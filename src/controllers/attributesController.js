@@ -19,9 +19,10 @@ class AttributesController {
                 type,
                 max_value,
                 default_value,
-                player_attr,
-                icon,
+                player_attr
             } = request.body;
+
+            const icon = request.file.originalname;
 
             const newAttribute = await Attributes.create({
                 _id,

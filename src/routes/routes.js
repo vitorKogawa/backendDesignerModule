@@ -1,4 +1,4 @@
-import { static, Router } from "express";
+import express, { Router } from "express";
 import { gameRouter } from "./game.routes";
 import { nodeConnectionRoutes } from "./nodeConnection.routes";
 import { labelRoutes } from "./label.routes";
@@ -7,8 +7,8 @@ import { attributeRoute } from "./attributes.routes";
 import { eventsRoute } from "./events.routes";
 import { playerConfigRoute } from "./playerConfig.routes";
 import { rewardsRoute } from "./rewards.routes";
-// import { redisRouter } from './redis.routes'
 import { resolve } from "path";
+// import { redisRouter } from './redis.routes'
 
 const routes = Router();
 
@@ -22,6 +22,6 @@ routes.use("/playerConfig", playerConfigRoute);
 routes.use("/rewards", rewardsRoute);
 // routes.use(redisRouter);
 
-routes.use(static(resolve(__dirname, "assets", "img")));
+routes.use('/home/card/img/', express.static(resolve(__dirname, '../assets/img/games')));
 
 export { routes };

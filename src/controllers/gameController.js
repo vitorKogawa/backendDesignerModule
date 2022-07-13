@@ -33,19 +33,12 @@ class GameController {
             template,
             background_color,
             background_image,
-            image,
             userID,
         } = request.body;
 
+        const image = request.file.originalname;
+
         try {
-            var logoImage = "default.jpg";
-            var bgImage = "default.jpg";
-            if (typeof request.files.gameImage !== "undefined") {
-                logoImage = request.files.gameImage[0].filename;
-            }
-            if (typeof request.files.background_image !== "undefined") {
-                bgImage = request.files.background_image[0].filename;
-            }
             const game = await Game.create({
                 title,
                 description,
@@ -53,13 +46,17 @@ class GameController {
                 default_text_color,
                 template,
                 background_color,
-                background_image: bgImage,
-                image: logoImage,
+                background_image,
+                image,
                 userID,
             });
 
+            console.log(game)
+            console.log(game.image)
+
             return response.send({ game });
-        } catch (err) {
+        } catch (error) {
+            console.log(error)
             return response.status(400).send({ error: "Registration failed." });
         }
     };

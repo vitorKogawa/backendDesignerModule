@@ -1,42 +1,25 @@
-import multer from "multer";
+import multer, { DiskStorageOptions } from "multer";
 import crypto from "crypto";
 import { extname, resolve } from "path";
 
-// const storage = multer.diskStorage({
-//     destination: resolve(__dirname, '..', 'assets', 'img', 'games'),
-//     filename: (request, file, callback) => {
-//         crypto.randomBytes(16, (err, response) => {
-//             if (err) return callback(err);
+import * as multer from "multer";
+import { resolve } from "path";
 
-//             return callback(null, response.toString('hex') + extname(file.originalname));
-//         })
-//     },
-// }),
+const gameStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callback(null, resolve(__dirname, "..", "assets", "img", "games"));
+    },
+    filename: (request, file, callback) => callback(null, file.originalname)
+});
 
-// const upload = multer({
-//     storage: storage,
-//     limits: { fileSize: 1000000 }
-// }).fields([
-//     { name: "background_image", maxCount: 1 },
-//     { name: "gameImage", maxCount: 1 }
-// ])
+const attributesStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callback(null, resolve(__dirname, "..", "assets", "img", "attributes"));
+    },
+    filename: (request, file, callback) => callback(null, file.originalname)
+});
 
-export default multer({
-    storage: multer.diskStorage({
-        destination: resolve(__dirname, "..", "assets", "img", "games"),
-        filename: (request, file, callback) => {
-            crypto.randomBytes(16, (err, response) => {
-                if (err) return callback(err);
+const games_img_upload = multer({ storage: gameStorage });
+const attributes_img_upload = multer({ storage: attributesStorage });
 
-                return callback(
-                    null,
-                    response.toString("hex") + extname(file.originalname)
-                );
-            });
-        },
-    }),
-    limits: { fileSize: 1000000 },
-}).fields([
-    { name: "background_image", maxCount: 1 },
-    { name: "gameImage", maxCount: 1 },
-]);
+export { games_img_upload, attributes_img_upload }
