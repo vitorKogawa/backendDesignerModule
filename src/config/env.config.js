@@ -1,4 +1,4 @@
 import { config } from "dotenv";
-import { resolve } from 'path'
+import { resolve } from 'path';
 
-config({ path: resolve(__dirname, '..', '..', '.env.development') })
+config({ path: resolve(__dirname, '..', '..', '.env.development') });
