@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { resolve, extname } from "path";
-import { Game } from './../models/game'
-//const Game = require("../models/game");
+import { Game } from '../models/game';
+// const Game = require("../models/game");
 
 // const multer = require("multer");
 
@@ -21,101 +21,101 @@ import { Game } from './../models/game'
 // ]);
 
 class GameController {
-    /**
-     * Create the new game
-     */
-    create = async (request, response) => {
-        const {
-            title,
-            description,
-            default_node_color,
-            default_text_color,
-            template,
-            background_color,
-            background_image,
-            userID,
-        } = request.body;
+  /**
+   * Create the new game
+   */
+  create = async (request, response) => {
+    const {
+      title,
+      description,
+      default_node_color,
+      default_text_color,
+      template,
+      background_color,
+      background_image,
+      userID,
+    } = request.body;
 
-        const image = request.file.originalname;
+    const image = request.file.originalname;
 
-        try {
-            const game = await Game.create({
-                title,
-                description,
-                default_node_color,
-                default_text_color,
-                template,
-                background_color,
-                background_image,
-                image,
-                userID,
-            });
+    try {
+      const game = await Game.create({
+        title,
+        description,
+        default_node_color,
+        default_text_color,
+        template,
+        background_color,
+        background_image,
+        image,
+        userID,
+      });
 
-            console.log(game)
-            console.log(game.image)
+      console.log(game);
+      console.log(game.image);
 
-            return response.send({ game });
-        } catch (error) {
-            console.log(error)
-            return response.status(400).send({ error: "Registration failed." });
-        }
-    };
+      return response.send({ game });
+    } catch (error) {
+      console.log(error);
+      return response.status(400).send({ error: "Registration failed." });
+    }
+  };
 
-    /**
-     * Find all games in database
-     */
-    findAll = async (request, response) => {
-        try {
-            const game = await Game.find();
+  /**
+   * Find all games in database
+   */
+  findAll = async (request, response) => {
+    try {
+      const game = await Game.find();
 
-            return response.send({ game });
-        } catch (err) {
-            console.log(err);
-            return response.status(400).send({ error: err });
-        }
-    };
+      return response.send({ game });
+    } catch (err) {
+      console.log(err);
+      return response.status(400).send({ error: err });
+    }
+  };
 
-    /**
-     * Find the game by ID
-     */
-    findByID = async (request, response) => {
-        try {
-            const game = await Game.findById(request.params.id).populate({
-                path: "nodes",
-                model: "gameNode",
-                populate: {
-                    path: "labels",
-                    model: "label",
-                },
-            });
+  /**
+   * Find the game by ID
+   */
+  findByID = async (request, response) => {
+    try {
+      const game = await Game.findById(request.params.id).populate({
+        path: 'nodes',
+        model: 'gameNode',
+        populate: {
+          path: 'labels',
+          model: "label",
+        },
+      });
 
-            return response.send({ game });
-        } catch (err) {
-            return response.status(400).send({ error: "Failed to get game." });
-        }
-    };
+      return response.status(200).json(game)
+    } catch (err) {
+      return response.status(400).send({ error: 'Failed to get game.' });
+    }
+  };
 
-    /**
-     * Find all games from same user ID
-     */
-    findUserGamesByID = async (request, response) => {
-        try {
-            const game = await Game.find({
-                userID: request.params.id,
-            }).populate({
-                path: "nodes",
-                model: "gameNode",
-                populate: {
-                    path: "labels",
-                    model: "label",
-                },
-            });
+  /**
+   * Find all games from same user ID
+   */
+  findUserGamesByID = async (request, response) => {
+    try {
+      const game = await Game.find({
+        userID: request.params.id,
+      }).populate({
+        path: 'nodes',
+        model: 'gameNode',
+        populate: {
+          path: 'labels',
+          model: 'label',
+        },
+      });
 
-            return response.send({ game });
-        } catch (err) {
-            return response.status(400).send({ error: "Failed to get game." });
-        }
-    };
+      return response.send({ game });
+    } catch (err) {
+      return response.status(400).send({ error: 'Failed to get game.' });
+    }
+  };
 }
 
 export default new GameController();
