@@ -1,5 +1,5 @@
 import { Router } from "express";
-import rewardsController from "./../controllers/rewardsController";
+import rewardsController from '../controllers/rewardsController';
 
 const rewardsRoute = Router();
 
