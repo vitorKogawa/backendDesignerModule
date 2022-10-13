@@ -1,38 +1,38 @@
-import { Router } from 'express'
-import { rewards } from './../models/rewards'
+import { Router } from 'express';
+import { rewards } from '../models/rewards';
 
 class RewardsController {
-    create = async (request, response) => {
-        try {
-            //code ...
-        } catch (error) {
-            return response.status(400).json({ message_error: error })
-        }
+  create = async (request, response) => {
+    try {
+      // code ...
+    } catch (error) {
+      return response.status(400).json({ message_error: error });
     }
+  };
 
-    find = async (request, response) => {
-        try {
-            //code ...
-        } catch (error) {
-            return response.status(400).json({ message_error: error })
-        }
+  find = async (request, response) => {
+    try {
+      // code ...
+    } catch (error) {
+      return response.status(400).json({ message_error: error });
     }
+  };
 
-    update = async (request, response) => {
-        try {
-            //code ...
-        } catch (error) {
-            return response.status(400).json({ message_error: error })
-        }
+  update = async (request, response) => {
+    try {
+      // code ...
+    } catch (error) {
+      return response.status(400).json({ message_error: error });
     }
+  };
 
-    remove = async (request, response) => {
-        try {
-            //code ...
-        } catch (error) {
-            return response.status(400).json({ message_error: error })
-        }
+  remove = async (request, response) => {
+    try {
+      // code ...
+    } catch (error) {
+      return response.status(400).json({ message_error: error });
     }
+  };
 }
 
-export default new RewardsController()
+export default new RewardsController();
