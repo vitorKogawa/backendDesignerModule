@@ -1,9 +1,9 @@
 import { response, Router } from "express";
-import { Attributes } from "./../models/attributes";
+import { Attributes } from '../models/attributes';
 
 /**
  * [TODO]
- *  -> Vaidações dos dados 
+ *  -> Vaidações dos dados
  *      -> create ...
  *      -> findByID ...
  *      -> update ...
@@ -14,12 +14,7 @@ class AttributesController {
     create = async (request, response) => {
         try {
             const {
-                _id,
-                name,
-                type,
-                max_value,
-                default_value,
-                player_attr
+                _id, name, type, max_value, default_value, player_attr
             } = request.body;
 
             const icon = request.file.originalname;
@@ -40,17 +35,24 @@ class AttributesController {
         }
     };
 
+    findAll = async (request, response) => {
+        try {
+            const attributes = await Attributes.find()
+
+            return response.status(200).json({ attributes })
+        } catch (error) {
+            return response.status(400).json({ error })
+        }
+    }
+
     findByID = async (request, response) => {
         try {
             const attribute = await Attributes.findById(request.params.id);
 
             if (attribute) {
                 return response.status(200).json(attribute);
-            } else {
-                return response
-                    .status(400)
-                    .json({ message: "Attribute not found." });
             }
+            return response.status(400).json({ message: 'Attribute not found.' });
         } catch (error) {
             return response.status(400).json({ error });
         }
@@ -59,7 +61,7 @@ class AttributesController {
     update = async (request, response) => {
         try {
             const IsAttribute = await Attributes.findById(request.params.id);
-            console.log(IsAttribute)
+            console.log(IsAttribute);
 
             if (IsAttribute) {
                 const newAttributeData = {
@@ -72,16 +74,13 @@ class AttributesController {
                 };
 
                 await Attributes.updateOne(
-                    { "_id": request.params.id },
+                    { _id: request.params.id },
                     newAttributeData
                 );
 
-                return response.status(200).json({ message: "sucess." });
-            } else {
-                return response
-                    .status(400)
-                    .json({ message: "attribute not found." });
+                return response.status(200).json({ message: 'sucess.' });
             }
+            return response.status(400).json({ message: 'attribute not found.' });
         } catch (error) {
             return response.status(400).json({ message_error: error });
         }
@@ -96,12 +95,9 @@ class AttributesController {
             if (IsAtribute) {
                 await Attributes.deleteOne(IsAtribute);
 
-                return response.status(200).json({ message: "sucess." });
-            } else {
-                return response
-                    .status(400)
-                    .json({ message: "attribute not found" });
+                return response.status(200).json({ message: 'sucess.' });
             }
+            return response.status(400).json({ message: 'attribute not found' });
         } catch (error) {
             return response.status(400).json({ error });
         }
