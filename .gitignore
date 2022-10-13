@@ -109,5 +109,3 @@ dist
 .eslintrc.json
 
 src/assets
-
-nodemon.json
