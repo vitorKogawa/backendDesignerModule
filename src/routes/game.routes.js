@@ -12,5 +12,6 @@ gameRouter.post(
 gameRouter.get("/", gameController.findAll);
 gameRouter.get("/:id", gameController.findByID);
 gameRouter.get("/userGames/:id", gameController.findUserGamesByID);
+gameRouter.delete("/:id", gameController.deleteByID);
 
 export { gameRouter };

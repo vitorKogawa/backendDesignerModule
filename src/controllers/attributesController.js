@@ -61,7 +61,7 @@ class AttributesController {
     update = async (request, response) => {
         try {
             const IsAttribute = await Attributes.findById(request.params.id);
-            console.log(IsAttribute);
+            console.log(request.body)
 
             if (IsAttribute) {
                 const newAttributeData = {
@@ -92,13 +92,16 @@ class AttributesController {
                 _id: request.params.id,
             });
 
+            console.log(IsAtribute)
+
             if (IsAtribute) {
-                await Attributes.deleteOne(IsAtribute);
+                await Attributes.deleteOne({ _id: request.params.id });
 
                 return response.status(200).json({ message: 'sucess.' });
             }
             return response.status(400).json({ message: 'attribute not found' });
         } catch (error) {
+            console.error(error)
             return response.status(400).json({ error });
         }
     };

@@ -23,8 +23,13 @@ routes.use("/rewards", rewardsRoute);
 // routes.use(redisRouter);
 
 routes.use(
-  '/home/card/img/',
-  express.static(resolve(__dirname, '../assets/img/games')),
+    '/home/card/img/attributes/',
+    express.static(resolve(__dirname, '../assets/img/attributes/')),
+);
+
+routes.use(
+    '/home/card/img/games/',
+    express.static(resolve(__dirname, '../assets/img/games/')),
 );
 
 

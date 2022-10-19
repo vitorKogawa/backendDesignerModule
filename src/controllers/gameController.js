@@ -116,6 +116,16 @@ class GameController {
       return response.status(400).send({ error: 'Failed to get game.' });
     }
   };
+
+  deleteByID = async (request, response) => {
+    try {
+        await Game.deleteOne({ _id: request.params.id })
+
+        return response.status(200).json({ msg: "sucess" })
+    } catch (error) {
+        return response.status(400).json({ msg: error })
+    }
+  }
 }
 
 export default new GameController();

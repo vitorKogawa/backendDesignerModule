@@ -5,7 +5,7 @@ const eventsRoute = Router();
 
 eventsRoute.post("/create", eventsController.create);
 eventsRoute.get("/", eventsController.findAll);
-eventsRoute.get("/:id", eventsController.find);
+eventsRoute.get("/:id", eventsController.findByID);
 eventsRoute.put("/:id", eventsController.update);
 eventsRoute.delete("/:id", eventsController.remove);
 

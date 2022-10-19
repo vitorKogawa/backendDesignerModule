@@ -42,7 +42,7 @@ class EventsController {
         }
     }
 
-    find = async (request, response) => {
+    findByID = async (request, response) => {
         try {
             // code ...
         } catch (error) {
@@ -52,7 +52,40 @@ class EventsController {
 
     update = async (request, response) => {
         try {
-            // code ...
+            const IsEvent = await Events.findById(request.params.id)
+
+            if (IsEvent) {
+                const {
+                    name,
+                    source_type,
+                    source_id,
+                    operator,
+                    value,
+                    target_type,
+                    target_id,
+                    modifier,
+                } = request.body;
+
+                const newEventData = {
+                    name,
+                    source_type,
+                    source_id,
+                    operator,
+                    value,
+                    target_type,
+                    target_id,
+                    modifier,
+                }
+
+                await Events.updateOne(
+                    { _id: request.params.id },
+                    newEventData
+                )
+
+                return response.status(200).json({ message: 'event.' })
+            }
+
+            return response.status(400).json({ message: 'event not found.' });
         } catch (error) {
             return response.status(400).json({ message_error: error });
         }
@@ -60,7 +93,9 @@ class EventsController {
 
     remove = async (request, response) => {
         try {
-            // code ...
+            await Events.deleteOne({ _id: request.params.id })
+
+            return response.status(200).json({ msg: "sucess." })
         } catch (error) {
             return response.status(400).json({ message_error: error });
         }
