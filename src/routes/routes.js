@@ -8,7 +8,6 @@ import { attributeRoute } from './attributes.routes';
 import { eventsRoute } from './events.routes';
 import { playerConfigRoute } from './playerConfig.routes';
 import { rewardsRoute } from './rewards.routes';
-// import { redisRouter } from './redis.routes'
 
 const routes = Router();
 
@@ -20,7 +19,6 @@ routes.use("/attributes", attributeRoute);
 routes.use("/events", eventsRoute);
 routes.use("/playerConfig", playerConfigRoute);
 routes.use("/rewards", rewardsRoute);
-// routes.use(redisRouter);
 
 routes.use(
     '/home/card/img/attributes/',

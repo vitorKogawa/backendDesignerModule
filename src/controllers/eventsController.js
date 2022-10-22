@@ -44,9 +44,14 @@ class EventsController {
 
     findByID = async (request, response) => {
         try {
-            // code ...
+            const events = await Events.findById(request.params.id);
+
+            if (events) {
+                return response.status(200).json(events);
+            }
+            return response.status(400).json({ message: 'Event not found.' });
         } catch (error) {
-            return response.status(400).json({ message_error: error });
+            return response.status(400).json({ error });
         }
     };
 

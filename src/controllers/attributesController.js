@@ -1,14 +1,4 @@
-import { response, Router } from "express";
 import { Attributes } from '../models/attributes';
-
-/**
- * [TODO]
- *  -> Vaidações dos dados
- *      -> create ...
- *      -> findByID ...
- *      -> update ...
- *      -> remove ...
- */
 
 class AttributesController {
     create = async (request, response) => {

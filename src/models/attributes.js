@@ -1,8 +1,3 @@
-/**
-    “all_labels”: [embeddedDocument]
-    “attributes”: [embeddedDocument]
-    “player_model”: embeddedDocument
-*/
 import { mongoose } from '../database/connection';
 
 const attributesSchema = mongoose.Schema({
