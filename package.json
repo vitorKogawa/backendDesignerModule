@@ -7,6 +7,9 @@
     "start": "node src/server.js",
     "dev": "nodemon"
   },
+  "engines": {
+    "node": "16.5.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -23,12 +26,12 @@
     "multer": "^1.4.2",
     "nodemon": "^2.0.16",
     "path": "^0.12.7",
-    "redis": "^3.1.2"
+    "redis": "^3.1.2",
+    "dotenv": "^10.0.0",
+    "sucrase": "^3.20.3"
   },
   "devDependencies": {
-    "dotenv": "^10.0.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "sucrase": "^3.20.3"
+    "eslint-plugin-import": "^2.25.2"
   }
 }
