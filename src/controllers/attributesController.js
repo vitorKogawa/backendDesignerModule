@@ -7,8 +7,6 @@ class AttributesController {
                 _id, name, type, max_value, default_value, player_attr
             } = request.body;
 
-            const icon = request.file.originalname;
-
             const newAttribute = await Attributes.create({
                 _id,
                 name,
@@ -16,7 +14,7 @@ class AttributesController {
                 max_value,
                 default_value,
                 player_attr,
-                icon,
+                icon: request.file ? request.file.originalname : 'attribute_default_icon.png',
             });
 
             return response.status(200).json({ newAttribute });

@@ -36,8 +36,6 @@ class GameController {
       userID,
     } = request.body;
 
-    const image = request.file.originalname;
-
     try {
       const game = await Game.create({
         title,
@@ -47,7 +45,7 @@ class GameController {
         template,
         background_color,
         background_image,
-        image,
+        image: request.file ? request.file.originalname : 'game_default_icon.png',
         userID,
       });
 
