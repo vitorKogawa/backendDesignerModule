@@ -34,7 +34,7 @@ routes.post("/login", (request, response) =>
     response.status(200).json({ message: "ok" })
 );
 
-const baseDir = resolve(__dirname, "..", "..", "build");
+const baseDir = resolve(__dirname, "..", "build");
 routes.use(express.static(baseDir));
 routes.get("*", (request, response) =>
     response.sendFile("index.html", { root: baseDir })

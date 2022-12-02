@@ -4,7 +4,10 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "pm2 start -f dist/server.js",
+    "stop": "pm2 stop dist/server.js",
+    "logs": "pm2 logs",
+    "build": "sucrase ./src -d dist -t imports",
     "dev": "nodemon"
   },
   "engines": {
@@ -15,6 +18,7 @@
   "dependencies": {
     "@sentry/node": "^6.10.0",
     "@sentry/tracing": "^6.10.0",
+    "babel-cli": "^6.26.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0 || ^8.2.0",
