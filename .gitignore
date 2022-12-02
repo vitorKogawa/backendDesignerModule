@@ -107,5 +107,3 @@ dist
 #prettier and eslint file
 .prettierrc
 .eslintrc.json
-
-src/assets
