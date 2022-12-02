@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "start": "pm2 start src/server.js",
+    "start": "nodemon",
     "dev": "nodemon"
   },
   "engines": {
