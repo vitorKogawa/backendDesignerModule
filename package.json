@@ -8,7 +8,8 @@
     "stop": "pm2 stop dist/server.js",
     "logs": "pm2 logs",
     "build": "sucrase ./src -d dist -t imports",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "heroku-postbuild": "pm2 start -f dist/server.js"
   },
   "engines": {
     "node": "16.5.0"
