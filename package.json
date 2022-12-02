@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/server.js",
   "scripts": {
-    "start": "pm2 start -f dist/server.js",
+    "start": "pm2-runtime start ./ecosystem.config.js",
     "stop": "pm2 stop dist/server.js",
     "logs": "pm2 logs",
     "build": "sucrase ./src -d dist -t imports",
